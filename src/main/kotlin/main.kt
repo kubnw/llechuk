@@ -7,7 +7,7 @@ fun main(args: Array<String>){
     var progress = 1
 
     for (i in 1..howMany){
-        val name = genHash(6)
+        val name = genEntry(6)
         var p = r.exec("wget prnt.sc/$name >> $name")
         p.waitFor()
         val source = (FileReader(name).readLines().toString()).split("\"")
@@ -20,7 +20,7 @@ fun main(args: Array<String>){
 }
 
 // todo: figure out compatible entry points, speed up the process
-fun getCharacter(): Char{
+fun genCharacter(): Char{
     val whatFunction = (1..2).random()
     var whatToReturn = '\u0000'
     when (whatFunction) {
@@ -29,10 +29,10 @@ fun getCharacter(): Char{
     }
     return whatToReturn
 }
-fun genHash(size: Int): String{
+fun genEntry(size: Int): String{
     val carrier = CharArray(size)
     for (i in 0..size-1){
-        carrier[i] = getCharacter()
+        carrier[i] = genCharacter()
     }
     return String(carrier)
 }
